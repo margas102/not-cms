@@ -1,0 +1,34 @@
+{
+  "routes": {
+    "/": {
+      "vars" : {
+        "title" : "Привет, это главная",
+        "description": "А это описание страницы главной",
+        "keywords": "Тут мы что видим? Ключевые слова"
+      },
+      "file": "index.php"
+    },
+    "/test/": {
+      "vars" : {
+        "title" : "Привет, это тестовая страница",
+        "description": "А это описание тестовой страницы",
+        "keywords": "Тут мы что видим? Ключевые слова у тестовой страницы"
+      },
+      "file": "test.php"
+    },
+    "/form/sendform/": {
+      "file": "success_form.php"
+    },
+    "/form/" : {
+      "file" : "form.php"
+    }
+  },
+  "layouts" : {
+    "header" : {
+      "file" : "header.php"
+    },
+    "footer" : {
+      "file" : "footer.php"
+    }
+  }
+}
