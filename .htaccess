@@ -6,10 +6,10 @@ RewriteCond $1 [A-Z]
 RewriteRule ^(.*)$ /${lc:$1} [R=301,L]
 
 
-#RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteCond %{REQUEST_URI} !(.*)/$
-#RewriteCond %{REQUEST_URI} !(\.js|\....|\.screen|\.....)$ [NC]
-#RewriteRule ^(.*)$ /$1/ [R=301,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteCond %{REQUEST_URI} !(\.js|\....|\.screen|\.....)$ [NC]
+RewriteRule ^(.*)$ /$1/ [R=301,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
