@@ -21,6 +21,9 @@ class index
     {
         $uri = explode('/', $_SERVER['REQUEST_URI']);
         if ($uri[1] == 'form' && !empty($uri[2])) {
+            if (empty($_POST)) {
+                $this->view->set404Page();
+            }
             $this->getFormData();
         }
         $this->getTemplateInfo($_SERVER['REQUEST_URI']);
