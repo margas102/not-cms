@@ -44,11 +44,10 @@ class index
     private function getFormData()
     {
         $to      = 'margasov.mikhail@gmail.com';
+        $subject = 'Получена форма с сайта';
         if (isset($_POST['form_name'])) {
             $subject = $_POST['form_name'];
-            unset($subject);
-        } else {
-            $subject = 'Получена форма с сайта';
+            unset($_POST['form_name']);
         }
         $text = '';
         foreach ($_POST as $key=>$item) {
@@ -56,7 +55,7 @@ class index
         }
 
         //Дано начало для загрузки файлов
-        if (!empty($_FILES)) {
+        if (!empty($_FILES['file']['name'])) {
             $dir = ROOT . '/uploads/';
             $file = $dir . basename($_FILES['file']['name']);
             if (move_uploaded_file($_FILES['file']['tmp_name'], $file)) {
@@ -69,7 +68,7 @@ class index
         $headers = "From: info@tooly.ru" . "\r\n";
         $headers .= "Reply-To: info@tooly.ru". "\r\n";
         $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
         if (mail($to, $subject, $text, $headers)) {
             $this->page_data['file'] = 'success_form.php';
         } else {
