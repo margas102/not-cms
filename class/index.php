@@ -44,7 +44,12 @@ class index
     private function getFormData()
     {
         $to      = 'margasov.mikhail@gmail.com';
-        $subject = (isset($_POST['form_name'])) ? $_POST['form_name'] : 'Получена форма с сайта';
+        if (isset($_POST['form_name'])) {
+            $subject = $_POST['form_name'];
+            unset($subject);
+        } else {
+            $subject = 'Получена форма с сайта';
+        }
         $text = '';
         foreach ($_POST as $key=>$item) {
             $text .= '<p><strong>' . $key . '</strong>' . ' : ' . $item . '</p>';
