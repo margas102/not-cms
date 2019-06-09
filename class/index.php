@@ -44,10 +44,21 @@ class index
     private function getFormData()
     {
         $to      = 'margasov.mikhail@gmail.com';
-        $subject = 'Test Message';
+        $subject = (isset($_POST['form_name'])) ? $_POST['form_name'] : 'Получена форма с сайта';
         $text = '';
         foreach ($_POST as $key=>$item) {
             $text .= '<p><strong>' . $key . '</strong>' . ' : ' . $item . '</p>';
+        }
+
+        //Дано начало для загрузки файлов
+        if (!empty($_FILES)) {
+            $dir = ROOT . '/uploads/';
+            $file = $dir . basename($_FILES['file']['name']);
+            if (move_uploaded_file($_FILES['file']['tmp_name'], $file)) {
+                $text .= '<p><strong>Прикрепленный файл: <a href="http://' . $_SERVER['HTTP_HOST'] . '/uploads/' . basename($_FILES['file']['name']) . '">Ссылка</a></strong></p>';
+            } else {
+                $text .= "Произошла ошибка загруззки файла";
+            }
         }
 
         $headers = "From: info@tooly.ru" . "\r\n";
@@ -59,18 +70,6 @@ class index
         } else {
             $this->page_data['file'] = 'failed_form.php';
         }
-        //Дано начало для загрузки файлов
-        /*if (!empty($_FILES)) {
-            $dir = '/uploads/';
-            $file = $dir . basename($_FILES['file']['name']);
-            print_r($file);
-            try {
-                move_uploaded_file($_FILES['file']['tmp_name'], $file);
-            } catch (Exception $e) {
-                echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
-            }
-        }
-        print_r($_FILES);*/
         return true;
     }
 
