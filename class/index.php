@@ -19,8 +19,9 @@ class index
 
     public function route()
     {
-        $uri = explode('/', $_SERVER['REQUEST_URI']);
-        $this->getTemplateInfo($_SERVER['REQUEST_URI']);
+        $uri_text = preg_replace('/\?(.*)/','', $_SERVER['REQUEST_URI']);
+        $uri = explode('/', $uri_text);
+        $this->getTemplateInfo($uri_text);
         if ($uri[1] == 'form' && !empty($uri[2])) {
             if (empty($_POST)) {
                 $this->view->set404Page();
